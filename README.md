@@ -9,6 +9,12 @@ pipenv install -r requirements.txt
 pipenv shell
 ```
 
+Run:
+
+```sh
+python3 app/repo_downloader.py
+```
+
 Test:
 
 ```sh
