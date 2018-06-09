@@ -11,8 +11,8 @@ def test_check_files():
     result = check_files(repo_name=repo, expected_files=files)
     assert result == {"README.md":True, "app/my_app.py":True, ".env.example":True}
 
-#def test_check_files_missing():
-#    repo = "tests/mocks/repos/my_repo"
-#    files = ["README.md", "some/other/file.md"]
-#    result = check_files(repo_name=repo, expected_files=files)
-#    assert result == {"README.md":True, "some/other/file.md":True}
+def test_check_files_missing():
+    repo = "tests/mocks/repos/my_repo"
+    files = ["README.md", "some/other/nonexistent_file.md"]
+    result = check_files(repo_name=repo, expected_files=files)
+    assert result == {"README.md":True, "some/other/nonexistent_file.md":False}

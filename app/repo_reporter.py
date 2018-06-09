@@ -17,7 +17,8 @@ def check_files(repo_name="repos/my_repo", expected_files=[]):
     repo_filepath = os.path.join(os.path.dirname(__file__), "..", repo_name)
     report = {}
     for expected_file in expected_files:
-        report[expected_file] = True
+        expected_filepath = os.path.join(repo_filepath, expected_file)
+        report[expected_file] = os.path.isfile(expected_filepath)
     return report
 
 if __name__ == '__main__':
