@@ -13,6 +13,22 @@ def read_filepaths_from_file(filename="db/filepaths.csv"):
             expected_filepaths.append(row["filepath"])
     return expected_filepaths
 
+def check_files(repo_name="repos/my_repo", expected_files=[]):
+    repo_filepath = os.path.join(os.path.dirname(__file__), "..", repo_name)
+    report = {}
+    for expected_file in expected_files:
+        report[expected_file] = True
+    return report
+
 if __name__ == '__main__':
+
     expected_filepaths = read_filepaths_from_file("db/filepaths.csv")
     print(expected_filepaths)
+
+    #repo_dirs = os.listfiles("repos")
+    pdb.set_trace()
+
+    #for repo_dirname in repo_dirs:
+    #    print("-----------")
+    #    result = check_files(repo_dirname=repo_dirname, expected_filepaths=expected_filepaths)
+    #    print(result)
