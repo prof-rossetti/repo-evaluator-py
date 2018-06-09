@@ -16,3 +16,9 @@ def test_check_files_missing():
     files = ["README.md", "some/other/nonexistent_file.md"]
     result = check_files(repo_name=repo, expected_files=files)
     assert result == {"README.md":True, "some/other/nonexistent_file.md":False}
+
+def test_check_files_including_dirs():
+    repo = "tests/mocks/repos/my_repo"
+    files = ["app", "app/db", "nonexistent_dir"]
+    result = check_files(repo_name=repo, expected_files=files)
+    assert result == {"app":True, "app/db": True, "nonexistent_dir":False}
