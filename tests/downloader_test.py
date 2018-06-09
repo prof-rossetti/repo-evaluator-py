@@ -1,3 +1,7 @@
+import pathlib
+import os
+import pytest
+
 from app.repo_downloader import *
 
 def test_parsed_output():
@@ -19,3 +23,15 @@ def test_repo_owner():
 
 def test_repo_name():
     assert repo_name("https://github.com/user123/repo456") == "repo456"
+
+def test_clean_up():
+    my_dir = "tests/mocks/clean_me"
+    pathlib.Path(my_dir).mkdir(parents=True, exist_ok=True) # source: https://stackoverflow.com/a/14364249/670433
+    assert os.path.isdir(my_dir) == True
+    clean_up(my_dir)
+    assert os.path.isdir(my_dir) == False
+
+def test_clean_up_nothing():
+    my_dir = "tests/mocks/clean_me"
+    with pytest.raises(FileNotFoundError) as e: # should raise error if dir doesn't exist, source: https://stackoverflow.com/questions/23337471/how-to-properly-assert-that-an-exception-gets-raised-in-pytest
+        clean_up(my_dir)

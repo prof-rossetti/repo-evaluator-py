@@ -1,6 +1,9 @@
-import subprocess
 from IPython import embed
+import os
 import pdb
+import shutil
+import subprocess
+
 
 def parsed_output(my_output):
     return my_output.decode().strip()
@@ -23,20 +26,17 @@ def repo_owner(url):
 def repo_name(url):
     return url.split("/")[4]
 
-
-
-
-
-
-
+def clean_up(dirname="repos"):
+    dirpath = os.path.join(os.path.dirname(__file__), "..", dirname)
+    shutil.rmtree(dirpath) # source: https://stackoverflow.com/a/186236/670433
 
 if __name__ == '__main__':
 
     # CLEAN REPOS DIR
-    # ... os delete all files in "repos/{project}" dir
+    try: clean_up()
+    except FileNotFoundError as e: print(e)
 
     # READ URLS FROM SUBMISSIONS.CSV FILE
-
     repo_urls = [
         "https://github.com/s2t2/python-csv-crud-app",
         #"https://github.com/s2t2/python-csv-crud-app/tree/testing4",
@@ -46,7 +46,6 @@ if __name__ == '__main__':
     for repo_url in repo_urls:
 
         # CLONE/DOWNLOAD REPO
-
         clone_address = repo_clone_address(repo_url)
         user = repo_owner(repo_url)
         command = f"git clone {clone_address} repos/{user}" # clone into a specific dir
@@ -59,7 +58,6 @@ if __name__ == '__main__':
         # ... then checkout that branch after downloading
 
         # OPEN FOR INSPECTION
-
         results, err = system_command("open repos")
         if err: print("ERROR:", error)
         if results: print("RESULTS:", parsed_output(results))
