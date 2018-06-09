@@ -1,5 +1,6 @@
 import subprocess
 from IPython import embed
+import pdb
 
 def parsed_output(my_output):
     return my_output.decode().strip()
@@ -10,22 +11,55 @@ def system_command(my_command="whoami"):
     output, error = process.communicate()
     return output, error
 
+def repo_clone_address(url):
+    name = repo_name(url)
+    last_char_index = url.index(name) + len(name)
+    repo_url = url[:last_char_index]
+    return f"{repo_url}.git"
+
+def repo_owner(url):
+    return url.split("/")[3]
+
+def repo_name(url):
+    return url.split("/")[4]
+
+
+
+
+
+
+
+
 if __name__ == '__main__':
 
     # CLEAN REPOS DIR
-    # ... os delete all files in "repos" dir
+    # ... os delete all files in "repos/{project}" dir
 
-    # COMPILE CLONE COMMAND
+    # READ URLS FROM SUBMISSIONS.CSV FILE
 
-    https_clone_url = "https://github.com/s2t2/python-csv-crud-app.git"
-    command = f"git clone {https_clone_url} repos/my_user/my_repo" # clone into a specific dir
+    repo_urls = [
+        "https://github.com/s2t2/python-csv-crud-app",
+        #"https://github.com/s2t2/python-csv-crud-app/tree/testing4",
+        "https://github.com/prof-rossetti/inventory-mgmt-app-py/tree/solution"
+    ]
 
-    # CLONE/DOWNLOAD REPO
+    for repo_url in repo_urls:
 
-    results, err = system_command(command)
-    if err: print("ERROR:", error)
-    if results: print("RESULTS:", parsed_output(results))
+        # CLONE/DOWNLOAD REPO
 
-    # CHECKOUT BRANCH AS NECESSARY
-    # ... if repo_url contains the word "tree" (e.g. /tree/my_branch),
-    # ... then checkout that branch after downloading
+        clone_address = repo_clone_address(repo_url)
+        user = repo_owner(repo_url)
+        command = f"git clone {clone_address} repos/{user}" # clone into a specific dir
+        results, err = system_command(command)
+        if err: print("ERROR:", error)
+        if results: print("RESULTS:", parsed_output(results))
+
+        # CHECKOUT BRANCH AS NECESSARY
+        # ... if repo_url contains the word "tree" (e.g. /tree/my_branch),
+        # ... then checkout that branch after downloading
+
+        # OPEN FOR INSPECTION
+
+        results, err = system_command("open repos")
+        if err: print("ERROR:", error)
+        if results: print("RESULTS:", parsed_output(results))
