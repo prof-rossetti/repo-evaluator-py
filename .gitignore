@@ -1,4 +1,6 @@
 .DS_Store
 .pytest_cache/
+db/filepaths.csv
+db/report.csv
 db/submissions.csv
 repos/*
