@@ -1,6 +1,19 @@
 # Repository Evaluation System
 
+[![Build Status](https://travis-ci.com/prof-rossetti/repo-evaluator-py.svg?branch=master)](https://travis-ci.com/prof-rossetti/repo-evaluator-py)
+
+## Prerequisites
+
+Requires Git.
+
 ## Installation
+
+Install source code:
+
+```sh
+git clone git@github.com:prof-rossetti/repo-evaluator-py.git
+cd repo-evaluator-py/
+```
 
 Install package dependencies:
 
