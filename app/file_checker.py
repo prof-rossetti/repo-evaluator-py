@@ -2,7 +2,7 @@ import csv
 import os
 import pdb
 
-def read_filepaths_from_file(filename="db/filepaths.csv"):
+def read_filepaths_from_file(filename="db/files_expected.csv"):
     csv_filepath = os.path.join(os.path.dirname(__file__), "..", filename)
     #print("-----------------")
     #print("READING EXPECTED REPO FILEPATHS FROM FILE:", csv_filepath)
@@ -15,11 +15,29 @@ def read_filepaths_from_file(filename="db/filepaths.csv"):
 
 def check_files(repo_name="repos/my_repo", expected_files=[]):
     repo_filepath = os.path.join(os.path.dirname(__file__), "..", repo_name)
-    report = {}
+    files_report = {}
     for expected_file in expected_files:
         expected_filepath = os.path.join(repo_filepath, expected_file)
-        report[expected_file] = os.path.exists(expected_filepath) # h/t: https://stackoverflow.com/a/17752147/670433
-    return report
+        files_report[expected_file] = os.path.exists(expected_filepath) # h/t: https://stackoverflow.com/a/17752147/670433
+
+    repo = repo_name
+    if "/" in repo: repo = repo.split("/")[-1]
+    return {"repo": repo, "files": files_report}
+
+def write_results_to_file(results=[], filename="db/files_checked.csv"):
+    csv_filepath = os.path.join(os.path.dirname(__file__), "..", filename)
+    expected_files = results[0]["files"]
+    headers = ["repo"] + list(expected_files)
+
+    with open(csv_filepath, "w") as csv_file:
+        writer = csv.DictWriter(csv_file, fieldnames=headers)
+        writer.writeheader() # uses fieldnames set above
+        for result in results:
+            row = {"repo": result["repo"]}
+            for expected_file in expected_files:
+                row[expected_file] = result["files"][expected_file]
+            writer.writerow(row)
+
 
 if __name__ == '__main__':
 
@@ -33,8 +51,8 @@ if __name__ == '__main__':
         print(repo.upper())
         print("-----------------")
         repo_path = os.path.join(os.path.dirname(__file__), "..", "repos", repo)
-        results = check_files(repo_name=repo_path, expected_files=expected_files)
-        for k, v in results.items(): # adapted from: https://stackoverflow.com/a/3294899/670433
+        result = check_files(repo_name=repo_path, expected_files=result)
+        for k, v in result.items(): # adapted from: https://stackoverflow.com/a/3294899/670433
             if v == True:
                 print(v, " |", k) # pad a space to make up for difference in chars between "true" and "false"
             else:
