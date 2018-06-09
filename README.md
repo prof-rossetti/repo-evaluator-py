@@ -5,11 +5,14 @@
 Install package dependencies:
 
 ```sh
-pipenv install -r requirements.txt
-```
+# For Pipenv users:
+pipenv install -r requirements.txt # then run `pipenv shell`
 
-```sh
-pipenv shell
+# For Homebrew-installed Python 3.x on Mac OS:
+pip3 install -r requirements.txt
+
+# All others:
+pip install -r requirements.txt
 ```
 
 ## Setup
@@ -44,7 +47,7 @@ python3 app/repo_downloader.py
 Analyze contents of each repo to detect presence of files at specified locations:
 
 ```sh
-python3 app/file_checker.py # this will write a report to `db/report.csv`
+python3 app/file_checker.py # this will write a report to `db/file_checks.csv`
 ```
 
 ## Testing
