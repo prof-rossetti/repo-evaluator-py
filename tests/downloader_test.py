@@ -35,3 +35,8 @@ def test_clean_up_nothing():
     my_dir = "tests/mocks/clean_me"
     with pytest.raises(FileNotFoundError) as e: # should raise error if dir doesn't exist, source: https://stackoverflow.com/questions/23337471/how-to-properly-assert-that-an-exception-gets-raised-in-pytest
         clean_up(my_dir)
+
+def test_read_submission_from_file():
+    submissions = read_submission_from_file("tests/submissions.csv")
+    assert len(submissions) == 2
+    assert submissions[0]["repository_url"] == "https://github.com/user123/some-repo"

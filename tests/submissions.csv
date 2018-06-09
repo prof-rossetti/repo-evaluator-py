@@ -1,0 +1,4 @@
+github_username, repository_url
+user123, https://github.com/user123/some-repo
+user456, https://github.com/user456/another-repo-py/tree/my-branch
+"partner1, partner2, partner3", https://github.com/partner2/group-repo
