@@ -15,8 +15,10 @@ def test_system_command():
     assert error == None
 
 def test_repo_clone_address():
-    assert repo_clone_address("https://github.com/user123/repo456") == "https://github.com/user123/repo456.git"
-    assert repo_clone_address("https://github.com/user123/repo456/tree/branch789") == "https://github.com/user123/repo456.git"
+    assert repo_clone_address(url="https://github.com/user123/repo456", mode="https") == "https://github.com/user123/repo456.git"
+    assert repo_clone_address(url="https://github.com/user123/repo456", mode="ssh") == "git@github.com:user123/repo456.git"
+    assert repo_clone_address(url="https://github.com/user123/repo456/tree/branch789", mode="https") == "https://github.com/user123/repo456.git"
+    assert repo_clone_address(url="https://github.com/user123/repo456/tree/branch789", mode="ssh") == "git@github.com:user123/repo456.git"
 
 def test_repo_owner():
     assert repo_owner("https://github.com/user123/repo456") == "user123"
@@ -38,5 +40,5 @@ def test_clean_up_nothing():
 
 def test_read_submission_from_file():
     submissions = read_submission_from_file("tests/submissions.csv")
-    assert len(submissions) == 2
+    assert len(submissions) == 3
     assert submissions[0]["repository_url"] == "https://github.com/user123/some-repo"

@@ -14,11 +14,15 @@ def system_command(my_command="whoami"):
     output, error = process.communicate()
     return output, error
 
-def repo_clone_address(url):
-    name = repo_name(url)
-    last_char_index = url.index(name) + len(name)
-    repo_url = url[:last_char_index]
-    return f"{repo_url}.git"
+def repo_clone_address(url="", mode="ssh"):
+    repo = repo_name(url)
+    last_char_index = url.index(repo) + len(repo)
+    if mode == "https":
+        clone_address = f"{url[:last_char_index]}.git"
+    elif mode == "ssh":
+        user = repo_owner(url)
+        clone_address = f"git@github.com:{user}/{repo}.git"
+    return clone_address
 
 def repo_owner(url):
     return url.split("/")[3]
@@ -32,6 +36,7 @@ def clean_up(dirname="repos"):
 
 def read_submission_from_file(filename="db/submissions.csv"):
     csv_filepath = os.path.join(os.path.dirname(__file__), "..", filename)
+    print("-----------------")
     print("READING SUBMISSIONS FROM FILE:", csv_filepath)
     submissions = []
     with open(csv_filepath, "r") as csv_file:
@@ -58,10 +63,13 @@ if __name__ == '__main__':
 
         # DOWNLOAD REPO
 
-        clone_address = repo_clone_address(submission_url)
+        clone_address = repo_clone_address(url=submission_url, mode="ssh")
         user = repo_owner(submission_url)
         command = f"git clone {clone_address} repos/{user}" # clone into a specific dir
 
+        print("-----------------")
+        print(f"{user}".upper())
+        print("-----------------")
         results, err = system_command(command)
         if err:
             print("ERROR:", error)
@@ -73,15 +81,15 @@ if __name__ == '__main__':
         # TODO: if repo_url contains the word "tree" (e.g. /tree/my_branch),
         # ... then checkout that branch after downloading
 
-        # OPEN FOR INSPECTION
+    # OPEN FOR INSPECTION
 
-        results, err = system_command(f"open {repos_dirname}")
-        if err:
-            print("ERROR:", error)
-        if results:
-            print("-----------------")
-            print("RESULTS:", parsed_output(results))
+    results, err = system_command(f"open {repos_dirname}")
+    if err:
+        print("ERROR:", error)
+    if results:
+        print("-----------------")
+        print("RESULTS:", parsed_output(results))
 
-        print("-----------------")
-        print("DONE! HAPPY GRADING :-)")
-        print("-----------------")
+    print("-----------------")
+    print("DONE! HAPPY GRADING :-)")
+    print("-----------------")

@@ -36,5 +36,5 @@ python3 app/repo_downloader.py
 Run tests:
 
 ```sh
-pytest
+pytest tests/
 ```
