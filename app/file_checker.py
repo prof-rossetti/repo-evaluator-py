@@ -46,15 +46,20 @@ if __name__ == '__main__':
     repos_dirpath = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "repos")) # need absolute path to pass to os.listdir(), adapted from source: https://stackoverflow.com/a/2860193/670433
     repos = os.listdir(repos_dirpath)
 
+    results = []
     for repo in repos:
         print("-----------------")
         print(repo.upper())
         print("-----------------")
         repo_path = os.path.join(os.path.dirname(__file__), "..", "repos", repo)
-        result = check_files(repo_name=repo_path, expected_files=result)
-        for k, v in result.items(): # adapted from: https://stackoverflow.com/a/3294899/670433
+        result = check_files(repo_name=repo_path, expected_files=expected_files)
+        results.append(result)
+
+        for k, v in result["files"].items(): # adapted from: https://stackoverflow.com/a/3294899/670433
             if v == True:
                 print(v, " |", k) # pad a space to make up for difference in chars between "true" and "false"
             else:
                 print(v, "|", k)
     print("-----------------")
+
+    write_results_to_file(results=results, filename="db/files_checked.csv")
