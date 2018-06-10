@@ -2,9 +2,13 @@
 
 [![Build Status](https://travis-ci.com/prof-rossetti/repo-evaluator-py.svg?branch=master)](https://travis-ci.com/prof-rossetti/repo-evaluator-py)
 
+Downloads student project repositories for further evaluation.
+Also checks the repositories for files at specified locations,
+and produces a corresponding CSV report of the results.
+
 ## Prerequisites
 
-Requires Git.
+Requires Git and Python 3.x.
 
 ## Installation
 
