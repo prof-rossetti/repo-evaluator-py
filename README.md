@@ -39,7 +39,7 @@ Populate `db/submissions.csv` with entries like the following:
 
 > NOTE: All repository urls are assumed to be valid. It's ok if they point to certain branches (i.e. urls with "`repo_name`/tree/`branch_name`")
 
-To take advantage of file-checking features, also populate the `db/filenames.csv` file with a list of files each repository should contain, for example:
+To take advantage of file-checking features, also populate the `db/filenames.csv` file with a list of files and/or directories each repository should contain, for example:
 
     filepath
     .env.example
@@ -47,14 +47,14 @@ To take advantage of file-checking features, also populate the `db/filenames.csv
     README.md
     products_app/app.py
     products_app/db/products_default.csv
-    tests/products_app/app_test.py
+    tests
 
 ## Usage
 
 Download all the repos:
 
 ```sh
-python3 app/repo_downloader.py
+python3 app/repo_downloader.py # this will populate the `repos` directory!
 ```
 
 Analyze contents of each repo to detect presence of files at specified locations:
@@ -68,5 +68,7 @@ python3 app/file_checker.py # this will write a report to `db/file_checks.csv`
 Run tests:
 
 ```sh
-pytest tests/
+pytest tests/ # specify filepath to exclude tests from downloaded repos
 ```
+
+## [License](LICENSE.md)
