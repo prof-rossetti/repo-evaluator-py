@@ -39,6 +39,6 @@ def test_clean_up_nothing():
         clean_up(my_dir)
 
 def test_read_submission_from_file():
-    submissions = read_submission_from_file("tests/submissions.csv")
+    submissions = read_submission_from_file("tests/mocks/submissions.csv")
     assert len(submissions) == 3
     assert submissions[0]["repository_url"] == "https://github.com/user123/some-repo"

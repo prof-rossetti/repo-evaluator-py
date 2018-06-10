@@ -1,4 +1,7 @@
 .DS_Store
 .pytest_cache/
+db/files_expected.csv
+db/files_checked.csv
 db/submissions.csv
 repos/*
+tests/mocks/files_checked.csv
