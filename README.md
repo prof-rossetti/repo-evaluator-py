@@ -4,7 +4,7 @@
 
 Downloads student project repositories for further evaluation.
 Also checks the repositories for files at specified locations,
-and produces a corresponding CSV report of the results.
+and produces a corresponding CSV report of the results (i.e. for importing into a spreadsheet gradebook).
 
 ## Prerequisites
 
@@ -23,7 +23,7 @@ Install package dependencies:
 
 ```sh
 # For Pipenv users:
-pipenv install -r requirements.txt # then run `pipenv shell`
+pipenv install # then run `pipenv shell`
 
 # For Homebrew-installed Python 3.x on Mac OS:
 pip3 install -r requirements.txt
