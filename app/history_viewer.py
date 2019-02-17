@@ -1,6 +1,6 @@
 import webbrowser
 
-from repo_downloader import read_submission_from_file
+from app.repo_downloader import read_submission_from_file
 
 # Different URL templates for commit history pages:
 # ... https://github.com/{USERNAME}/{REPONAME}/commits/master"
