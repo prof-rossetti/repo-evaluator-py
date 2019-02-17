@@ -22,13 +22,6 @@ cd repo-evaluator-py/
 Install package dependencies:
 
 ```sh
-# For Pipenv users:
-pipenv install # then run `pipenv shell`
-
-# For Homebrew-installed Python 3.x on Mac OS:
-pip3 install -r requirements.txt
-
-# All others:
 pip install -r requirements.txt
 ```
 
@@ -58,13 +51,19 @@ To take advantage of file-checking features, also populate the `db/filenames.csv
 Download all the repos:
 
 ```sh
-python3 app/repo_downloader.py # this will populate the `repos` directory!
+python app/repo_downloader.py # this will populate the `repos` directory!
 ```
 
 Analyze contents of each repo to detect presence of files at specified locations:
 
 ```sh
-python3 app/file_checker.py # this will write a report to `db/file_checks.csv`
+python app/file_checker.py # this will write a report to `db/file_checks.csv`
+```
+
+View in a browser the version history of each repo:
+
+```sh
+python app/history_viewer.py
 ```
 
 ## Testing
