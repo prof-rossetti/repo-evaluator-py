@@ -1,5 +1,6 @@
 .DS_Store
 .pytest_cache/
+app/__pycache__
 db/files_expected.csv
 db/files_checked.csv
 db/submissions.csv
