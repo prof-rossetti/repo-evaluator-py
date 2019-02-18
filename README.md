@@ -66,6 +66,12 @@ View in a browser the version history of each repo:
 python -m app.history_viewer
 ```
 
+Analyze the version history for each repo:
+
+```sh
+python -m app.history_checker # this will write a report to `db/history_checks.csv`
+```
+
 ## Testing
 
 Run tests:

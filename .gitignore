@@ -1,6 +1,7 @@
 .DS_Store
 .pytest_cache/
 **/__pycache__
+db/authors_excluded.csv
 db/files_expected.csv
 db/files_checked.csv
 db/histories_checked.csv
