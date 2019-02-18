@@ -36,7 +36,7 @@ def clean_up(dirname="repos"):
 def read_submission_from_file(filename="db/submissions.csv"):
     csv_filepath = os.path.join(os.path.dirname(__file__), "..", filename)
     print("-----------------")
-    print("READING SUBMISSIONS FROM FILE:", csv_filepath)
+    print("READING SUBMISSIONS FROM FILE:\n", csv_filepath)
     submissions = []
     with open(csv_filepath, "r") as csv_file:
         reader = csv.DictReader(csv_file, skipinitialspace=True) # source: https://stackoverflow.com/a/17255790/670433
