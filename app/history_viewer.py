@@ -29,8 +29,8 @@ if __name__ == "__main__":
         exit("CANCELLING... PLEASE TRY AGAIN.")
     else:
         for url in urls:
-            print(f" ... {url}") # source: https://docs.python.org/3/library/webbrowser.html
-            webbrowser.open_new_tab(url)
+            print(f" ... {url}") 
+            webbrowser.open_new_tab(url) # source: https://docs.python.org/3/library/webbrowser.html
         print("-----------------")
 
     print("DONE. HAPPY GRADING!")
