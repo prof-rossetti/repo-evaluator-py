@@ -31,9 +31,12 @@ if __name__ == "__main__":
         # source: https://stackoverflow.com/questions/677436/how-do-i-get-the-git-commit-count
 
         #command = f"git rev-list --count master" #> 36
-        command = f"git shortlog -s -n"
+        #command = f"git shortlog -s -n"
         #> 24 Author XYZ
         #> 12 Author123
+        command = f"git shortlog -s -e"
+        #> 24 Author XYZ <xyz@Username-MacBook-Pro.local>
+        #> 12 Author123 <author123@users.noreply.github.com>
 
         cmd_results, cmd_err = system_command(command)
         if cmd_err:
@@ -43,12 +46,23 @@ if __name__ == "__main__":
             parsed_results = parsed_output(cmd_results)
             #> '36\tMYUSERNAME'
             #> '24\tAuthor XYZ\n     12\tAuthor123'
+
+            #> '36\tMYUSERNAME <email>'
+
             per_author = parsed_results.split("\n")
             per_author = [a.strip() for a in per_author] #> ['24\tAuthor XYZ', '12\tAuthor123']
             for s in per_author:
                 author_commits = s.split("\t") #> ['36', 'MYUSERNAME']
                 commit_count = int(author_commits[0])
                 author = author_commits[1]
-                histories.append({"repo": repo, "author": author, "commit_count": commit_count})
+                author = author.split("<")
+                author_name = author[0].strip()
+                author_email = author[1].replace(">","").strip()
+                histories.append({
+                    "owner": repo,
+                    "author_name": author_name,
+                    "author_email": author_email,
+                    "commit_count": commit_count
+                })
 
     write_results_to_file(results=histories)
