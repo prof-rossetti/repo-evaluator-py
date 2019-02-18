@@ -30,7 +30,7 @@ if __name__ == "__main__":
     else:
         for url in urls:
             print(f" ... {url}") # source: https://docs.python.org/3/library/webbrowser.html
-            #webbrowser.open_new_tab(url)
+            webbrowser.open_new_tab(url)
         print("-----------------")
 
     print("DONE. HAPPY GRADING!")
