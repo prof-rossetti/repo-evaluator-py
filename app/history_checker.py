@@ -13,7 +13,11 @@ def write_results_to_file(results=[], filename="db/histories_checked.csv"):
             writer.writerow(result)
 
 
+
 if __name__ == "__main__":
+
+
+    excluded_author_names = ["First Last"]
 
     histories = []
 
@@ -58,11 +62,12 @@ if __name__ == "__main__":
                 author = author.split("<")
                 author_name = author[0].strip()
                 author_email = author[1].replace(">","").strip()
-                histories.append({
-                    "owner": repo,
-                    "author_name": author_name,
-                    "author_email": author_email,
-                    "commit_count": commit_count
-                })
+                if not author_name in excluded_author_names:
+                    histories.append({
+                        "owner": repo,
+                        "author_name": author_name,
+                        "author_email": author_email,
+                        "commit_count": commit_count
+                    })
 
     write_results_to_file(results=histories)
