@@ -13,7 +13,7 @@ def read_excluded_authors(filename="db/authors_excluded.csv"):
             author_names.append(row["author_name"])
     return author_names
 
-def read_author_names(filename="db/user_author_names.csv"):
+def read_author_names(filename="db/users_authors.csv"):
     csv_filepath = os.path.join(os.path.dirname(__file__), "..", filename)
     author_names = []
     with open(csv_filepath, "r") as csv_file:
