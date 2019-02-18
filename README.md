@@ -2,13 +2,17 @@
 
 [![Build Status](https://travis-ci.com/prof-rossetti/repo-evaluator-py.svg?branch=master)](https://travis-ci.com/prof-rossetti/repo-evaluator-py)
 
-Downloads student project repositories for further evaluation.
-Also checks the repositories for files at specified locations,
-and produces a corresponding CSV report of the results (i.e. for importing into a spreadsheet gradebook).
+Downloads student project repositories for further evaluation. Also:
+  + checks for files at specified locations
+  + analyzes version histories
+  + opens version history URLs in a browser for further inspection
 
 ## Prerequisites
 
-Requires Git and Python 3.x.
+  + Git
+  + Anaconda 3.7
+  + Python 3.7
+  + Pip
 
 ## Installation
 
