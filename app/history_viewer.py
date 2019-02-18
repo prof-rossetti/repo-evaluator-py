@@ -1,8 +1,7 @@
 import os
 import webbrowser
 
-from app.repo_downloader import read_submission_from_file # pytest likes this
-#from repo_downloader import read_submission_from_file # python likes this
+from app.repo_downloader import read_submission_from_file
 
 # SUBMISSION URL EXAMPLES:
 # ... https://github.com/{USERNAME}/{REPONAME}
