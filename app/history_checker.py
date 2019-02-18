@@ -3,6 +3,15 @@ import os
 
 from app.repo_downloader import system_command, parsed_output
 
+def read_excluded_authors(filename="db/authors_excluded.csv"):
+    csv_filepath = os.path.join(os.path.dirname(__file__), "..", filename)
+    author_names = []
+    with open(csv_filepath, "r") as csv_file:
+        reader = csv.DictReader(csv_file, skipinitialspace=True) # source: https://stackoverflow.com/a/17255790/670433
+        for row in reader:
+            author_names.append(row["author_name"])
+    return author_names
+
 def write_results_to_file(results=[], filename="db/histories_checked.csv"):
     csv_filepath = os.path.join(os.path.dirname(__file__), "..", filename)
     headers = list(results[0].keys())
@@ -17,7 +26,7 @@ def write_results_to_file(results=[], filename="db/histories_checked.csv"):
 if __name__ == "__main__":
 
 
-    excluded_author_names = ["First Last"]
+    excluded_author_names = read_excluded_authors()
 
     histories = []
 
