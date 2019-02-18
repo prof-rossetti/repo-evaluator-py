@@ -1,5 +1,8 @@
 import csv
 import os
+import pandas as pd
+#import itertools
+#from operator import itemgetter
 
 from app.repo_downloader import system_command, parsed_output
 
@@ -31,7 +34,26 @@ def write_results_to_file(results=[], filename="db/histories_checked.csv"):
             writer.writerow(result)
 
 def group_by_username(author_histories):
+    #sorted_histories = sorted(author_histories, key=itemgetter("username")) # sort by some attribute
+    #histories_by_username = itertools.groupby(sorted_histories, key=itemgetter("username")) # group by the sorted attribute
+    #user_histories = []
+    #for username, histories in histories_by_username:
+    #    breakpoint()
+    #    history = histories[0]
+    #    history["commit_count"] = 0
+    #    for h in histories:
+    #        history["commit_count"] += int(h["commit_count"])
+    #    user_histories.append(h)
+    #return user_histories
+    df = pd.DataFrame(author_histories)
+    grouped_df = df.groupby(["owner", "username"]).sum()
     user_histories = []
+    for i, row in grouped_df.iterrows():
+        user_histories.append({
+            "owner": row.name[0],
+            "username": row.name[1],
+            "commit_count": row["commit_count"]
+        })
     return user_histories
 
 def lookup_username(author_name, users_authors):

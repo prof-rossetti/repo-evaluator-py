@@ -14,7 +14,7 @@ def test_group_by_username():
     ]
     user_histories = [
         {'owner': 'user123', 'username': 'user123', 'commit_count': 20},
-        {'owner': 'user456', 'username': 'user456', 'commit_count': 30},
-        {'owner': 'user456', 'username': 'guestcontrib', 'commit_count': 3}
+        {'owner': 'user456', 'username': 'guestcontrib', 'commit_count': 3},
+        {'owner': 'user456', 'username': 'user456', 'commit_count': 30}
     ]
     assert group_by_username(author_histories) == user_histories
