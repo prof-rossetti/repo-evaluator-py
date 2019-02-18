@@ -1,0 +1,54 @@
+import csv
+import os
+
+from app.repo_downloader import system_command, parsed_output
+
+def write_results_to_file(results=[], filename="db/histories_checked.csv"):
+    csv_filepath = os.path.join(os.path.dirname(__file__), "..", filename)
+    headers = list(results[0].keys())
+    with open(csv_filepath, "w") as csv_file:
+        writer = csv.DictWriter(csv_file, fieldnames=headers)
+        writer.writeheader() # uses fieldnames set above
+        for result in results:
+            writer.writerow(result)
+
+
+if __name__ == "__main__":
+
+    histories = []
+
+    repos_dirpath = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "repos")) # need absolute path to pass to os.listdir(), adapted from source: https://stackoverflow.com/a/2860193/670433
+    repos = os.listdir(repos_dirpath)
+
+    for repo in repos:
+        print("-----------------")
+        print(repo.upper())
+        print("-----------------")
+        repo_path = os.path.join(os.path.dirname(__file__), "..", "repos", repo)
+        #print(repo_path)
+        os.chdir(repo_path)
+
+        # source: https://stackoverflow.com/questions/677436/how-do-i-get-the-git-commit-count
+
+        #command = f"git rev-list --count master" #> 36
+        command = f"git shortlog -s -n"
+        #> 24 Author XYZ
+        #> 12 Author123
+
+        cmd_results, cmd_err = system_command(command)
+        if cmd_err:
+            print("ERROR:", cmd_err)
+            exit()
+        if cmd_results:
+            parsed_results = parsed_output(cmd_results)
+            #> '36\tMYUSERNAME'
+            #> '24\tAuthor XYZ\n     12\tAuthor123'
+            per_author = parsed_results.split("\n")
+            per_author = [a.strip() for a in per_author] #> ['24\tAuthor XYZ', '12\tAuthor123']
+            for s in per_author:
+                author_commits = s.split("\t") #> ['36', 'MYUSERNAME']
+                commit_count = int(author_commits[0])
+                author = author_commits[1]
+                histories.append({"repo": repo, "author": author, "commit_count": commit_count})
+
+    write_results_to_file(results=histories)

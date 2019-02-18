@@ -34,9 +34,3 @@ if __name__ == "__main__":
         print("-----------------")
 
     print("DONE. HAPPY GRADING!")
-
-
-
-    # TODO: consider additional functionality leveraging the git CLI to:
-    # ... analyze the histories / count the commits
-    # ... write results to CSV file
