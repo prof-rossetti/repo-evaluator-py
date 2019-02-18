@@ -1,5 +1,6 @@
 import csv
 import os
+import statistics as stats
 import pandas as pd
 
 from app.repo_downloader import system_command, parsed_output
@@ -31,6 +32,13 @@ def write_results_to_file(results=[], filename="db/histories_checked.csv"):
         for result in results:
             writer.writerow(result)
 
+def lookup_username(author_name, users_authors):
+    matching_usernames = [d["username"] for d in users_authors if d["author_name"].upper() == author_name.upper()]
+    try:
+        return matching_usernames[0]
+    except IndexError as err:
+        return author_name
+
 def group_by_username(author_histories):
     df = pd.DataFrame(author_histories)
     grouped_df = df.groupby(["owner", "username"]).sum()
@@ -42,13 +50,6 @@ def group_by_username(author_histories):
             "commit_count": row["commit_count"]
         })
     return user_histories
-
-def lookup_username(author_name, users_authors):
-    matching_usernames = [d["username"] for d in users_authors if d["author_name"].upper() == author_name.upper()]
-    try:
-        return matching_usernames[0]
-    except IndexError as err:
-        return author_name
 
 if __name__ == "__main__":
 
@@ -117,3 +118,13 @@ if __name__ == "__main__":
     username_histories = group_by_username(histories)
 
     write_results_to_file(results=username_histories)
+
+    commit_counts = [d["commit_count"] for d in username_histories]
+    print("-----------------")
+    print("COMMIT STATS...")
+    print("-----------------")
+    print("MIN:", min(commit_counts))
+    print("MAX:", max(commit_counts))
+    print("AVG:", stats.mean(commit_counts))
+    print("MEDIAN:", stats.median(commit_counts))
+    print("SUM:", sum(commit_counts))
