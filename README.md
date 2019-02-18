@@ -63,7 +63,7 @@ python app/file_checker.py # this will write a report to `db/file_checks.csv`
 View in a browser the version history of each repo:
 
 ```sh
-python app/history_viewer.py
+python -m app.history_viewer
 ```
 
 ## Testing
