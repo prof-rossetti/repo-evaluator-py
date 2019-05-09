@@ -23,6 +23,13 @@ git clone git@github.com:prof-rossetti/repo-evaluator-py.git
 cd repo-evaluator-py/
 ```
 
+Create and activate a new virtual environment:
+
+```sh
+conda create -n repo-eval-env python=3.7 # first time only
+conda activate repo-eval-env
+```
+
 Install package dependencies:
 
 ```sh
@@ -50,7 +57,7 @@ python app/repo_downloader.py # this will populate the `repos` directory!
 
 ### File Analysis
 
-Populate the `db/filenames.csv` file with a list of files and/or directories each repository should contain, for example:
+Populate the `db/files_expected.csv` file with a list of files and/or directories each repository should contain, for example:
 
     filepath
     .env.example
@@ -93,7 +100,7 @@ Populate the `db/users_authors.csv` file to specify a GitHub username for each n
 Analyze the version history for each repo:
 
 ```sh
-python -m app.history_checker # this will write a report to `db/history_checks.csv`
+python -m app.history_checker # this will write a report to `db/histories_checked.csv`
 ```
 
 ## Testing
