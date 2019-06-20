@@ -70,7 +70,7 @@ Populate the `db/files_expected.csv` file with a list of files and/or directorie
 Analyze contents of each repo to detect presence of files at specified locations:
 
 ```sh
-python app/file_checker.py # this will write a report to `db/file_checks.csv`
+python app/file_checker.py # this will write a report to `db/files_checked.csv`
 ```
 
 ### History Viewing

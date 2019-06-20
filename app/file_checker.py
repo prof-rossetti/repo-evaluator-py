@@ -26,6 +26,7 @@ def check_files(repo_name="repos/my_repo", expected_files=[]):
 
 def write_results_to_file(results=[], filename="db/files_checked.csv"):
     csv_filepath = os.path.join(os.path.dirname(__file__), "..", filename)
+
     expected_files = results[0]["files"]
     headers = ["repo"] + list(expected_files)
 
@@ -33,6 +34,7 @@ def write_results_to_file(results=[], filename="db/files_checked.csv"):
         writer = csv.DictWriter(csv_file, fieldnames=headers)
         writer.writeheader() # uses fieldnames set above
         for result in results:
+
             row = {"repo": result["repo"]}
             for expected_file in expected_files:
                 row[expected_file] = result["files"][expected_file]
@@ -62,4 +64,7 @@ if __name__ == '__main__':
                 print(v, "|", k)
     print("-----------------")
 
-    write_results_to_file(results=results, filename="db/files_checked.csv")
+    if results:
+            write_results_to_file(results=results, filename="db/files_checked.csv")
+    else:
+        print("OOPS, NO REPOS. HAVE YOU RUN THE REPO DOWNLOADER?")
