@@ -31,7 +31,9 @@ def repo_name(url):
 
 def clean_up(dirname="repos"):
     dirpath = os.path.join(os.path.dirname(__file__), "..", dirname)
-    shutil.rmtree(dirpath) # source: https://stackoverflow.com/a/186236/670433
+    print(dirpath)
+    if os.path.isdir(dirpath):
+        shutil.rmtree(dirpath) # source: https://stackoverflow.com/a/186236/670433
 
 def read_submission_from_file(filename="db/submissions.csv"):
     csv_filepath = os.path.join(os.path.dirname(__file__), "..", filename)
