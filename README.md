@@ -73,6 +73,15 @@ Analyze contents of each repo to detect presence of files at specified locations
 python app/file_checker.py # this will write a report to `db/files_checked.csv`
 ```
 
+### Standard File Analysis
+
+Analyze contents of each repo to detect presence of standard files (README, LICENSE, and tests):
+
+```sh
+python app/standard_file_checker.py # this will write a report to `reports/standard_files_checked.csv`
+```
+
+
 ### History Viewing
 
 View in a browser the version history of each repo:
