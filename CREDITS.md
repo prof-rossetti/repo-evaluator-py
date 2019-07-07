@@ -11,3 +11,7 @@
 ## Opening URLs in a Browser
 
   + https://docs.python.org/3/library/webbrowser.html
+
+## Iterating through Nested Files
+
+  + https://stackoverflow.com/a/2186565/670433

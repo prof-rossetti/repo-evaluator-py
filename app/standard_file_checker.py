@@ -16,7 +16,11 @@ if __name__ == "__main__":
         print("-----------------")
         repo_path = os.path.join(REPOS_DIRPATH, repo_name)
 
-        # h/t: https://stackoverflow.com/a/2186565/670433
+        tests = False
         python_files = Path(repo_path).glob("**/*.py")
         for python_filename in python_files:
-            print("...", python_filename)
+            #print("...", python_filename)
+            #type(python_filename) #> PosixPath
+            if "_test" in str(python_filename) or "test_" in str(python_filename):
+                tests = True
+        print("TESTS:", tests)
