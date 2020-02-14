@@ -66,7 +66,7 @@ if __name__ == '__main__':
 
         clone_address = repo_clone_address(url=submission_url, mode="ssh")
         user = repo_owner(submission_url)
-        command = f"git clone {clone_address} repos/{user}" # clone into a specific dir
+        command = f"git clone {clone_address} repos/{user.lower()}" # clone into a specific dir
 
         print("-----------------")
         print(f"{user}".upper())
