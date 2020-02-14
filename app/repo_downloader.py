@@ -15,6 +15,7 @@ def system_command(my_command="whoami"):
 
 def repo_clone_address(url="", mode="ssh"):
     repo = repo_name(url)
+    repo = repo.replace(".git","") # remove .git from the end of the url (so it doesn't get added twice). consider refactoring
     last_char_index = url.index(repo) + len(repo)
     if mode == "https":
         clone_address = f"{url[:last_char_index]}.git"
