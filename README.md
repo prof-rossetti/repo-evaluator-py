@@ -47,6 +47,8 @@ Populate `db/submissions.csv` with entries like the following:
     user456, https://github.com/user456/another-repo-py/tree/my-branch
     "partner1, partner2, partner3", https://github.com/partner2/group-repo
 
+> NOTE: The only required header here is `repository_url`
+
 > NOTE: All repository urls are assumed to be valid. It's ok if they point to certain branches (i.e. urls with "`repo_name`/tree/`branch_name`")
 
 Download all the repos:

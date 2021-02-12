@@ -56,6 +56,7 @@ if __name__ == '__main__':
     # READ URLS FROM SUBMISSIONS.CSV FILE
 
     submissions = read_submission_from_file("db/submissions.csv")
+    # todo: use "repository_url" or "GitHub Repository URL" or any key with "repo" and "url" in it
     submission_urls = [s["repository_url"] for s in submissions]
 
     for submission_url in submission_urls:

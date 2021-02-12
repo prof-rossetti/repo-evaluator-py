@@ -15,7 +15,7 @@ def history_url(submission_url):
     if "/blob/" in submission_url:
         return submission_url.replace("blob", "commits")
     else:
-        return os.path.join(submission_url, "commits", "master")
+        return os.path.join(submission_url, "commits", "main")
 
 if __name__ == "__main__":
 
@@ -29,7 +29,7 @@ if __name__ == "__main__":
         exit("CANCELLING... PLEASE TRY AGAIN.")
     else:
         for url in urls:
-            print(f" ... {url}") 
+            print(f" ... {url}")
             webbrowser.open_new_tab(url) # source: https://docs.python.org/3/library/webbrowser.html
         print("-----------------")
 
