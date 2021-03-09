@@ -21,6 +21,8 @@ if __name__ == "__main__":
 
     submissions = read_submission_from_file("db/submissions.csv")
     urls = [history_url(s["repository_url"]) for s in submissions]
+    urls = sorted(urls, key=lambda url: url.upper())
+    #print(urls[0])
 
     print("-----------------")
     confirm = input(f"DETECTED {len(urls)} HISTORY URLS. \nCONTINUE TO OPEN THEM ALL IN A BROWSER? (Y/N): ")

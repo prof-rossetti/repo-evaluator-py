@@ -5,7 +5,7 @@ db/authors_excluded.csv
 db/files_expected.csv
 db/files_checked.csv
 db/histories_checked.csv
-db/submissions.csv
+db/submissions*.csv
 db/users_authors.csv
 repos/*
 tests/mocks/files_checked.csv
