@@ -44,7 +44,7 @@ And also it would be nice to automate as much of the grading process as possible
 
 ### APIs and Web Service Requirements
 
-I thought I might need to use the [GitHub API](https://developer.github.com/v3/) to download all files ina given repository, 
+I thought I might need to use the [GitHub API](https://developer.github.com/v3/) to download all files in a given repository, 
 but then I came to the conclusion it would be easier to use command-line Git.
 
 ### Python Package Requirements
