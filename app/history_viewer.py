@@ -20,12 +20,16 @@ def history_url(submission_url):
 if __name__ == "__main__":
 
     submissions = read_submission_from_file("db/submissions.csv")
-    urls = [history_url(s["repository_url"]) for s in submissions]
+
+    url_field = input("PLEASE SELECT A COLUMN NAME THAT HAS THE URLS YOU WANT TO OPEN: ") or "repository_url"
+    print("OK, USING:", url_field)
+
+    urls = [history_url(s[url_field]) for s in submissions]
     urls = sorted(urls, key=lambda url: url.upper())
     #print(urls[0])
 
     print("-----------------")
-    confirm = input(f"DETECTED {len(urls)} HISTORY URLS. \nCONTINUE TO OPEN THEM ALL IN A BROWSER? (Y/N): ")
+    confirm = input(f"DETECTED {len(urls)} URLS. \nCONTINUE TO OPEN THEM ALL IN A BROWSER? (Y/N): ")
 
     if confirm.upper() != "Y":
         exit("CANCELLING... PLEASE TRY AGAIN.")
