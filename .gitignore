@@ -9,3 +9,5 @@ db/submissions*.csv
 db/users_authors.csv
 repos/*
 tests/mocks/files_checked.csv
+db/*.csv
+*.zip

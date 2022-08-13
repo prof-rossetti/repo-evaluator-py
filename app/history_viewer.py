@@ -21,7 +21,7 @@ if __name__ == "__main__":
 
     submissions = read_submission_from_file("db/submissions.csv")
 
-    url_field = input("PLEASE SELECT A COLUMN NAME THAT HAS THE URLS YOU WANT TO OPEN: ") or "repository_url"
+    url_field = input("PLEASE SELECT A COLUMN NAME THAT HAS THE URLS YOU WANT TO OPEN: ") or "GitHub Repository URL" #"repository_url"
     print("OK, USING:", url_field)
 
     urls = [history_url(s[url_field]) for s in submissions]

@@ -14,7 +14,7 @@ def system_command(my_command="whoami"):
     return output, error
 
 def repo_clone_address(url="", mode="ssh"):
-    repo = repo_name(url)
+    repo = repo_name(url.strip())
     last_char_index = url.index(repo) + len(repo)
     if mode == "https":
         clone_address = f"{url[:last_char_index]}.git"
@@ -27,7 +27,11 @@ def repo_owner(url):
     return url.split("/")[3]
 
 def repo_name(url):
+    #try:
     return url.split("/")[4]
+    #except:
+    #    print(url)
+    #    breakpoint()
 
 def clean_up(dirname="repos"):
     dirpath = os.path.join(os.path.dirname(__file__), "..", dirname)
@@ -57,7 +61,7 @@ if __name__ == '__main__':
 
     submissions = read_submission_from_file("db/submissions.csv")
     # todo: use "repository_url" or "GitHub Repository URL" or any key with "repo" and "url" in it
-    submission_urls = [s["repository_url"] for s in submissions]
+    submission_urls = [s["GitHub Repository URL"] for s in submissions]
 
     for submission_url in submission_urls:
 
@@ -65,7 +69,7 @@ if __name__ == '__main__':
 
         clone_address = repo_clone_address(url=submission_url, mode="ssh")
         user = repo_owner(submission_url)
-        command = f"git clone {clone_address} repos/{user}" # clone into a specific dir
+        command = f"git clone {clone_address} repos/{user.lower()}" # clone into a specific dir
 
         print("-----------------")
         print(f"{user}".upper())
