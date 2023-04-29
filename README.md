@@ -105,6 +105,22 @@ Analyze the version history for each repo:
 python -m app.history_checker # this will write a report to `db/histories_checked.csv`
 ```
 
+
+### Running Tests for Submissions
+
+
+Run tests for each submission separately:
+
+```sh
+for dir in ~/Desktop/grading-your-dir-here/*; do (cd "$dir" && pwd && pytest && cd ..); done
+
+# with sleep:
+for dir in ~/Desktop/grading-cleanup/*; do (cd "$dir" && pwd && pytest && cd .. && sleep 5); done
+```
+
+
+
+
 ## Testing
 
 Run tests:
